@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RecipeHub</title>
+    <link rel="icon" href="assets/images/logo-recipe-removebg-preview.png" />
+    <link href="./output.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+    <style>
+      * {
+        font-family: "Lora", serif;
+        color: #1f2937;
+        font-size: 20px;
+      }
+      .title-headers {
+        font-family: "Pacifico", cursive;
+        font-size: 50px;
+        font-weight: bolder;
+      }
+      .buttons {
+        font-family: "Poppins", sans-serif;
+        text-transform: uppercase;
+        color: white;
+        padding: 15px;
+        border-radius: 50px;
+        font-weight: bolder;
+        background-color: #f97316;
+      }
+      .buttons:hover {
+        background-color: #94450c;
+      }
+      .buttons1 {
+        font-family: "Poppins", sans-serif;
+        text-transform: uppercase;
+        color: white;
+        padding: 15px;
+        border-radius: 30px;
+        font-weight: bold;
+        background-color: #f97316;
+      }
+      .buttons1:hover {
+        background-color: #94450c;
+      }
+
+      img {
+        transition: ease-in 0.1s;
+      }
+
+      img:hover {
+        transform: scale(1.1);
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 5;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        height: 100%;
+      }
+
+      .modal-content {
+        background-color: #fff;
+        z-index: 5;
+        margin: 15% auto;
+        padding: 20px;
+        width: 80%;
+        border-radius: 8px;
+        max-height: 80vh; /* Limit height to 80% of viewport height */
+        overflow-y: auto; /* Enable vertical scrolling if needed */
+        text-align: center;
+      }
+
+      .close {
+        float: right;
+        font-size: 24px;
+        cursor: pointer;
+      }
+      .close1 {
+        float: right;
+        font-size: 24px;
+        cursor: pointer;
+      }
+      .close2 {
+        float: right;
+        font-size: 24px;
+        cursor: pointer;
+      }
+      .close3 {
+        float: right;
+        font-size: 24px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <!-- Canvas Background -->
+  <canvas
+    id="backgroundCanvas"
+    class="fixed top-0 left-0 w-full h-full z-0"
+  ></canvas>
+  <body class="bg-gray-100">
+    <!-- Simple Navbar -->
+
+    <nav
+      class="bg-white border-gray-200 dark:bg-gray-900 fixed top-0 w-full z-30"
+    >
+      <div
+        class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+      >
+        <a href="#home" class="flex items-center space-x-3 rtl:space-x-reverse">
+          <img
+            src="assets/images/logo-recipe-removebg-preview.png"
+            class="h-16"
+            alt="RecipeHub"
+          />
+          <span
+            class="title-headers self-center text-2xl font-bold whitespace-nowrap dark:text-white"
+            >RecipeHub</span
+          >
+        </a>
+        <button
+          data-collapse-toggle="navbar-default"
+          type="button"
+          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+          aria-controls="navbar-default"
+          aria-expanded="false"
+        >
+          <span class="sr-only">Open main menu</span>
+          <svg
+            class="w-5 h-5"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 17 14"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M1 1h15M1 7h15M1 13h15"
+            />
+          </svg>
+        </button>
+        <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+          <ul
+            class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
+          >
+            <li>
+              <a
+                href="#about-us"
+                class="block py-2 px-3 text-gray-900 hover:text-orange-500 rounded-sm"
+                >About</a
+              >
+            </li>
+
+            <li>
+              <a
+                href="#footer"
+                class="block py-2 px-3 text-gray-900 hover:text-orange-500 rounded-sm"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div
+      id="home"
+      class="grid grid-cols-1 md:grid-cols-10 w-full p-5 mt-20 relative z-20 h-full mb-4"
+    >
+      <!-- 50% column 1 -->
+      <div
+        class="col-span-1 md:col-span-5 flex flex-col justify-center items-start mb-4"
+      >
+        <div class="text-center md:text-start" style="color: #1f2937">
+          <h1 class="title-headers">Discover Delicious Recipes</h1>
+          <p class="text-gray-600 max-w-2xl mx-auto mb-4">
+            Welcome to Recipe Hub, your go-to destination for mouth-watering
+            recipes from around the world. Whether you're a seasoned chef or a
+            beginner in the kitchen, we have something for everyone. Explore our
+            collection of easy-to-follow recipes and start cooking today!
+          </p>
+          <a href="#explore-recipes" class="buttons"> Explore Recipes </a>
+        </div>
+      </div>
+
+      <!-- 50% column 1 -->
+      <div
+        class="col-span-1 md:col-span-5 lg:col-span-5 flex items-center justify-center mb-4"
+      >
+        <div id="default-carousel" class="w-full" data-carousel="slide">
+          <!-- Carousel wrapper -->
+          <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+            <!-- Item 1 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+              <img
+                src="assets/images/pexels-chanwalrus-958545.jpg"
+                class="w-full h-full carousel-img"
+                alt="..."
+              />
+            </div>
+            <!-- Item 2 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+              <img
+                src="assets/images/pexels-enginakyurt-2673353.jpg"
+                class="w-full h-full carousel-img"
+                alt="..."
+              />
+            </div>
+            <!-- Item 3 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+              <img
+                src="assets/images/pexels-lina-1813504.jpg"
+                class="w-full h-full carousel-img"
+                alt="..."
+              />
+            </div>
+            <!-- Slider indicators -->
+            <div
+              class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse"
+            >
+              <button
+                type="button"
+                class="w-3 h-3 rounded-full"
+                aria-current="true"
+                aria-label="Slide 1"
+                data-carousel-slide-to="0"
+              ></button>
+              <button
+                type="button"
+                class="w-3 h-3 rounded-full"
+                aria-current="false"
+                aria-label="Slide 2"
+                data-carousel-slide-to="1"
+              ></button>
+              <button
+                type="button"
+                class="w-3 h-3 rounded-full"
+                aria-current="false"
+                aria-label="Slide 3"
+                data-carousel-slide-to="2"
+              ></button>
+            </div>
+            <!-- Slider controls -->
+            <button
+              type="button"
+              class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+              data-carousel-prev
+            >
+              <span
+                class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+              >
+                <svg
+                  class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 6 10"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 1 1 5l4 4"
+                  />
+                </svg>
+                <span class="sr-only">Previous</span>
+              </span>
+            </button>
+            <button
+              type="button"
+              class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+              data-carousel-next
+            >
+              <span
+                class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+              >
+                <svg
+                  class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 6 10"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 9 4-4-4-4"
+                  />
+                </svg>
+                <span class="sr-only">Next</span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recipe Listing Section -->
+    <div
+      id="explore-recipes"
+      class="relative flex flex-col justify-center items-center mb-36"
+    >
+      <h1 class="title-headers text-center mt-4 mb-4">Top Recipes</h1>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+        <div class="col-span-1 md:col-span-3">
+          <div
+            class="max-w-sm text-start p-3 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
+          >
+            <a href="#">
+              <img
+                class="rounded-md h-60 w-full"
+                src="assets/images/pexels-chanwalrus-958545.jpg"
+                alt=""
+              />
+            </a>
+            <div class="p-5">
+              <a href="#">
+                <h5 class="mb-2 font-bold text-2xl">Garlic Shrimp</h5>
+              </a>
+              <p class="mb-3 font-normal">
+                A quick and flavorful dish with juicy shrimp cooked in garlic
+                butter and served with lemon and herbs.
+              </p>
+              <button class="buttons1" id="openModal">View Recipe</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-1 md:col-span-3">
+          <div
+            class="max-w-sm text-start p-3 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
+          >
+            <a href="#">
+              <img
+                class="rounded-md h-60 w-full"
+                src="assets/images/pexels-enginakyurt-2673353.jpg"
+                alt=""
+              />
+            </a>
+            <div class="p-5">
+              <a href="#">
+                <h5 class="mb-2 font-bold text-2xl">Chicken Adobo</h5>
+              </a>
+              <p class="mb-3 font-normal">
+                A quick and flavorful dish with tender chicken simmered in soy
+                sauce, vinegar, and garlic mix.
+              </p>
+              <button class="buttons1" id="openModal1">View Recipe</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-1 md:col-span-3">
+          <div
+            class="max-w-sm text-start p-3 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
+          >
+            <a href="#">
+              <img
+                class="rounded-md h-60 w-full"
+                src="assets/images/pexels-lina-1813504.jpg"
+                alt=""
+              />
+            </a>
+            <div class="p-5">
+              <a href="#">
+                <h5 class="mb-2 font-bold text-2xl">Spaghetti Aglio</h5>
+              </a>
+              <p class="mb-3 font-normal">
+                A quick and flavorful dish with pasta tossed in olive oil,
+                garlic, chili flakes, and parsley bits.
+              </p>
+              <button class="buttons1" id="openModal2">View Recipe</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-1 md:col-span-3">
+          <div
+            class="max-w-sm text-start p-3 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
+          >
+            <a href="#">
+              <img
+                class="rounded-md h-60 w-full"
+                src="assets/images/pexels-chanwalrus-958545.jpg"
+                alt=""
+              />
+            </a>
+            <div class="p-5">
+              <a href="#">
+                <h5 class="mb-2 font-bold text-2xl">Pancakes</h5>
+              </a>
+              <p class="mb-3 font-normal">
+                A quick and flavorful dish with pancakes stacked high and topped
+                with butter and maple syrup.
+              </p>
+              <button class="buttons1" id="openModal3">View Recipe</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="about-us" class="bg-gray-100 relative">
+      <div class="container mx-auto px-4">
+        <div class="text-center">
+          <!-- Heading -->
+          <h2 class="title-headers">About Us</h2>
+
+          <!-- Description -->
+          <p class="text-gray-600 max-w-2xl mx-auto mb-8 relative">
+            Welcome to
+            <span class="text-orange-500 font-semibold">Recipe Hub</span>, your
+            ultimate destination for delicious recipes from around the world. We
+            are passionate about food and cooking, and our mission is to inspire
+            you to create amazing dishes in your own kitchen. Whether you're a
+            seasoned chef or a beginner, we have something for everyone. Join
+            our community and start your culinary journey today!
+          </p>
+
+          <!-- Call-to-Action Button -->
+          <a href="#explore-recipes" class="buttons"> Explore Recipes </a>
+        </div>
+      </div>
+    </div>
+
+    <footer id="footer" class="bg-gray-800 py-8 mt-36 relative">
+      <div class="container mx-auto px-4">
+        <!-- Footer Content -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-1">
+          <!-- Contact Information -->
+          <div class="text-center md:text-left">
+            <h3 class="text-xl text-white font-bold mb-4">Contact Us</h3>
+            <div class="flex gap-4 justify-center flex-col">
+              <h2 class="text-white hover:text-orange-500">09423227423</h2>
+              <h2 class="text-white hover:text-orange-500">09423227423</h2>
+              <h2 class="text-white hover:text-orange-500">09423227423</h2>
+            </div>
+          </div>
+
+          <!-- Social Media Links -->
+          <div class="text-center">
+            <h3 class="text-xl text-white font-bold mb-4">Follow Us</h3>
+            <div class="flex justify-center space-x-4">
+              <a href="#" class="text-white hover:text-orange-500">
+                Facebook
+              </a>
+              <a href="#" class="text-white hover:text-orange-500">
+                Instagram
+              </a>
+              <a href="#" class="text-white hover:text-orange-500"> Twitter </a>
+            </div>
+          </div>
+
+          <!-- Newsletter Signup -->
+          <div class="text-center md:text-right">
+            <h3 class="text-xl font-bold text-white text-center mb-4">
+              Newsletter
+            </h3>
+            <form class="flex flex-col space-y-2">
+              <input
+                type="email"
+                placeholder="Your email"
+                class="p-2 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+              />
+              <button
+                type="submit"
+                class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Copyright -->
+        <div
+          class="flex flex-wrap justify-center items-center mt-8 border-t border-gray-700 pt-4"
+        >
+          <a href="#home">
+            <img
+              src="assets/images/logo-recipe-removebg-preview.png"
+              class="h-10"
+              alt="RecipeHub"
+            />
+          </a>
+          <p class="text-white text-center hover:text-orange-500">
+            &copy; 2023 Recipe Hub. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <div id="myModal" class="modal z-50">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h1 class="font-bold">Garlic Butter Shrimp</h1>
+        <ul class="list-inside list-disc text-start">
+          <p>Ingredients:</p>
+          <li>500g shrimp (peeled and deveined)</li>
+          <li>4 cloves garlic (minced)</li>
+          <li>3 tbsp butter</li>
+          <li>Salt and pepper</li>
+          <li>Chopped parsley (optional)</li>
+          <li>Lemon wedge (optional)</li>
+        </ul>
+        <ol class="list-inside list-decimal text-start">
+          <p>Steps:</p>
+          <li>In a bowl, mix flour, sugar, baking powder, and salt.</li>
+          <li>In another bowl, whisk milk, egg, and melted butter.</li>
+          <li>
+            Combine wet and dry ingredients; stir until just mixed (lumpy is
+            okay).
+          </li>
+          <li>Heat a non-stick pan and lig z-50h tly grease.</li>
+          <li>
+            Pour ¼ cup batter and cook until bubbles form. Flip and cook until
+            golden.
+          </li>
+          <li>Serve with syrup, fruits, or butter.</li>
+        </ol>
+      </div>
+    </div>
+    <div id="myModal1" class="modal z-50">
+      <div class="modal-content">
+        <span class="close1">&times;</span>
+        <h1 class="font-bold">Chicken Adobo</h1>
+        <ul class="list-inside list-disc text-start">
+          <p>Ingredients:</p>
+          <li>500g chicken (cut into pieces)</li>
+          <li>½ cup soy sauce</li>
+          <li>¼ cup vinegar</li>
+          <li>1 bay leaf</li>
+          <li>1 tsp peppercorn</li>
+          <li>1 cup water</li>
+        </ul>
+        <ol class="list-inside list-decimal text-start">
+          <p>Steps:</p>
+          <li>
+            In a pot, combine chicken, soy sauce, vinegar, garlic, bay leaf, and
+            peppercorn.
+          </li>
+          <li>Let it marinate for 30 minutes (optional but recommended).</li>
+          <li>Bring to a boil, then add water.</li>
+          <li>Simmer on low heat for 30–40 minutes until chicken is tender.</li>
+          <li>
+            Pour ¼ cup batter and cook until bubbles form. Flip and cook until
+            golden.
+          </li>
+          <li>Let the sauce reduce to desired thickness. Serve with rice.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div id="myModal2" class="modal z-50">
+      <div class="modal-content">
+        <span class="close2">&times;</span>
+        <h1 class="font-bold">Spaghetti Aglio</h1>
+        <ul class="list-inside list-disc text-start">
+          <p>Ingredients:</p>
+          <li>200g spaghetti</li>
+          <li>4 cloves garlic (sliced)</li>
+          <li>¼ cup olive oil</li>
+          <li>1 tsp chili flakes</li>
+          <li>Salt</li>
+          <li>Chopped parsley</li>
+        </ul>
+        <ol class="list-inside list-decimal text-start">
+          <p>Steps:</p>
+          <li>
+            Cook spaghetti in salted boiling water. Reserve ½ cup pasta water,
+            then drain.
+          </li>
+          <li>In a pan, heat olive oil over low heat.</li>
+          <li>Add garlic and chili flakes. Cook until garlic is golden.</li>
+          <li>Add drained spaghetti and pasta water.</li>
+          <li>Toss everything together. Top with parsley and serve hot.</li>
+        </ol>
+      </div>
+    </div>
+    <div id="myModal3" class="modal z-50">
+      <div class="modal-content">
+        <span class="close3">&times;</span>
+        <h1 class="font-bold">Pancakes</h1>
+        <ul class="list-inside list-disc text-start">
+          <p>Ingredients:</p>
+          <li>1 cup all-purpose flour</li>
+          <li>2 tbsp sugar</li>
+          <li>1 tbsp baking powder</li>
+          <li>1 cup milk</li>
+          <li>1 egg</li>
+          <li>2 tbsp melted butter</li>
+          <li>Pinch of salt</li>
+        </ul>
+        <ol class="list-inside list-decimal text-start">
+          <p>Steps:</p>
+          <li>In a bowl, mix flour, sugar, baking powder, and salt.</li>
+          <li>In another bowl, whisk milk, egg, and melted butter.</li>
+          <li>
+            Combine wet and dry ingredients; stir until just mixed (lumpy is
+            okay).
+          </li>
+          <li>Heat a non-stick pan and lightly grease.</li>
+          <li>
+            Pour ¼ cup batter and cook until bubbles form. Flip and cook until
+            golden.
+          </li>
+          <li>Serve with syrup, fruits, or butter.</li>
+        </ol>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>

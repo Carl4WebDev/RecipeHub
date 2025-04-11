@@ -1,0 +1,3 @@
+Button, NavLinks hover: #F97316 
+Texts: #1F2937
+bg: fffff
